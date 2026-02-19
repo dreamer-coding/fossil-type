@@ -13,7 +13,7 @@
  */
 #include <fossil/pizza/framework.h>
 
-#include "fossil/time/framework.h"
+#include "fossil/type/framework.h"
 
 // * * * * * * * * * * * * * * * * * * * * * * * *
 // * Fossil Logic Test Utilities
