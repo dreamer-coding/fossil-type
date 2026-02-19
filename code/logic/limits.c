@@ -31,53 +31,90 @@
 #include <string.h>
 
 /* ======================================================
+ * Fossil canonical numeric limits (platform frozen)
+ * ====================================================== */
+
+/* Signed integer limits */
+enum {
+    FOSSIL_I8_MIN  =  (-128),
+    FOSSIL_I8_MAX  =  127,
+
+    FOSSIL_I16_MIN =  (-32768),
+    FOSSIL_I16_MAX =  32767,
+
+    FOSSIL_I32_MIN =  (-2147483647 - 1),
+    FOSSIL_I32_MAX =  2147483647,
+
+    FOSSIL_I64_MIN =  (-9223372036854775807LL - 1),
+    FOSSIL_I64_MAX =  9223372036854775807LL
+};
+
+/* Unsigned integer limits */
+enum {
+    FOSSIL_U8_MAX  =  0xFFu,
+    FOSSIL_U16_MAX =  0xFFFFu,
+    FOSSIL_U32_MAX =  0xFFFFFFFFu,
+    FOSSIL_U64_MAX =  0xFFFFFFFFFFFFFFFFull
+};
+
+_Static_assert(sizeof(int8_t)  == 1, "Fossil requires 8-bit int8_t");
+_Static_assert(sizeof(int16_t) == 2, "Fossil requires 16-bit int16_t");
+_Static_assert(sizeof(int32_t) == 4, "Fossil requires 32-bit int32_t");
+_Static_assert(sizeof(int64_t) == 8, "Fossil requires 64-bit int64_t");
+
+_Static_assert(INT8_MIN  == FOSSIL_I8_MIN,  "Host i8 mismatch");
+_Static_assert(INT16_MIN == FOSSIL_I16_MIN, "Host i16 mismatch");
+_Static_assert(INT32_MIN == FOSSIL_I32_MIN, "Host i32 mismatch");
+_Static_assert(INT64_MIN == FOSSIL_I64_MIN, "Host i64 mismatch");
+
+/* ======================================================
  * Static limits table for all core Fossil types
  * ====================================================== */
 static const fossil_type_limits fossil_limits_table[] = {
 
     /* Signed integers */
-    {"i8",  SCHAR_MIN,  SCHAR_MAX, sizeof(int8_t)},
-    {"i16", SHRT_MIN,   SHRT_MAX,  sizeof(int16_t)},
-    {"i32", INT_MIN,    INT_MAX,   sizeof(int32_t)},
-    {"i64", LLONG_MIN,  LLONG_MAX, sizeof(int64_t)},
+    {"i8",  FOSSIL_I8_MIN,  FOSSIL_I8_MAX,  sizeof(int8_t)},
+    {"i16", FOSSIL_I16_MIN, FOSSIL_I16_MAX, sizeof(int16_t)},
+    {"i32", FOSSIL_I32_MIN, FOSSIL_I32_MAX, sizeof(int32_t)},
+    {"i64", FOSSIL_I64_MIN, FOSSIL_I64_MAX, sizeof(int64_t)},
 
     /* Unsigned integers */
-    {"u8",  0, UCHAR_MAX, sizeof(uint8_t)},
-    {"u16", 0, USHRT_MAX, sizeof(uint16_t)},
-    {"u32", 0, UINT_MAX,  sizeof(uint32_t)},
-    {"u64", 0, ULLONG_MAX,sizeof(uint64_t)},
+    {"u8", 0, FOSSIL_U8_MAX, sizeof(uint8_t)},
+    {"u16",0, FOSSIL_U16_MAX,sizeof(uint16_t)},
+    {"u32",0, FOSSIL_U32_MAX,sizeof(uint32_t)},
+    {"u64",0, FOSSIL_U64_MAX,sizeof(uint64_t)},
 
-    /* Hexadecimal (aliases of unsigned) */
-    {"h8", 0, UCHAR_MAX, sizeof(uint8_t)},
-    {"h16",0, USHRT_MAX, sizeof(uint16_t)},
-    {"h32",0, UINT_MAX,  sizeof(uint32_t)},
-    {"h64",0, ULLONG_MAX,sizeof(uint64_t)},
+    /* Hex aliases */
+    {"h8",  0, FOSSIL_U8_MAX,  sizeof(uint8_t)},
+    {"h16", 0, FOSSIL_U16_MAX, sizeof(uint16_t)},
+    {"h32", 0, FOSSIL_U32_MAX, sizeof(uint32_t)},
+    {"h64", 0, FOSSIL_U64_MAX, sizeof(uint64_t)},
 
-    /* Octal (aliases of unsigned) */
-    {"o8", 0, UCHAR_MAX, sizeof(uint8_t)},
-    {"o16",0, USHRT_MAX, sizeof(uint16_t)},
-    {"o32",0, UINT_MAX,  sizeof(uint32_t)},
-    {"o64",0, ULLONG_MAX,sizeof(uint64_t)},
+    /* Octal aliases */
+    {"o8",  0, FOSSIL_U8_MAX,  sizeof(uint8_t)},
+    {"o16", 0, FOSSIL_U16_MAX, sizeof(uint16_t)},
+    {"o32", 0, FOSSIL_U32_MAX, sizeof(uint32_t)},
+    {"o64", 0, FOSSIL_U64_MAX, sizeof(uint64_t)},
 
-    /* Binary (aliases of unsigned) */
-    {"b8", 0, UCHAR_MAX, sizeof(uint8_t)},
-    {"b16",0, USHRT_MAX, sizeof(uint16_t)},
-    {"b32",0, UINT_MAX,  sizeof(uint32_t)},
-    {"b64",0, ULLONG_MAX,sizeof(uint64_t)},
+    /* Binary aliases */
+    {"b8",  0, FOSSIL_U8_MAX,  sizeof(uint8_t)},
+    {"b16", 0, FOSSIL_U16_MAX, sizeof(uint16_t)},
+    {"b32", 0, FOSSIL_U32_MAX, sizeof(uint32_t)},
+    {"b64", 0, FOSSIL_U64_MAX, sizeof(uint64_t)},
 
-    /* Floating */
-    {"f32", INT32_MIN, INT32_MAX, sizeof(float)},
-    {"f64", INT64_MIN, INT64_MAX, sizeof(double)},
+    /* Floating ranges represented via integer storage model */
+    {"f32", FOSSIL_I32_MIN, FOSSIL_I32_MAX, sizeof(float)},
+    {"f64", FOSSIL_I64_MIN, FOSSIL_I64_MAX, sizeof(double)},
 
     /* Boolean */
     {"bool", 0, 1, sizeof(bool)},
 
     /* Tribool */
-    {"tribool", 0, 2, sizeof(uint8_t)}, /* 0=false, 1=true, 2=unknown */
+    {"tribool", 0, 2, sizeof(uint8_t)},
 
     /* Char and cstr */
     {"char", CHAR_MIN, CHAR_MAX, sizeof(char)},
-    {"cstr", 0, 0, sizeof(char*)}, /* variable-length string pointer */
+    {"cstr", 0, 0, sizeof(char*)},
 };
 
 /* Number of entries */
