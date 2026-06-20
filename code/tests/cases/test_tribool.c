@@ -122,11 +122,11 @@ FOSSIL_TEST(c_test_tribool_not_logic) {
 // * Fossil Logic Test Pool
 // * * * * * * * * * * * * * * * * * * * * * * * *
 FOSSIL_TEST_GROUP(c_tribool_tests) {
-    FOSSIL_TEST_ADD(c_tribool_suite, c_test_tribool_constructors);
-    FOSSIL_TEST_ADD(c_tribool_suite, c_test_tribool_predicates);
-    FOSSIL_TEST_ADD(c_tribool_suite, c_test_tribool_and_logic);
-    FOSSIL_TEST_ADD(c_tribool_suite, c_test_tribool_or_logic);
-    FOSSIL_TEST_ADD(c_tribool_suite, c_test_tribool_not_logic);
+    FOSSIL_ADD_TEST(c_tribool_suite, c_test_tribool_constructors);
+    FOSSIL_ADD_TEST(c_tribool_suite, c_test_tribool_predicates);
+    FOSSIL_ADD_TEST(c_tribool_suite, c_test_tribool_and_logic);
+    FOSSIL_ADD_TEST(c_tribool_suite, c_test_tribool_or_logic);
+    FOSSIL_ADD_TEST(c_tribool_suite, c_test_tribool_not_logic);
 
-    FOSSIL_TEST_REGISTER(c_tribool_suite);
+    FOSSIL_ADD_SUITE(c_tribool_suite);
 }

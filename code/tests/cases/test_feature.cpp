@@ -98,10 +98,10 @@ FOSSIL_TEST(cpp_test_Feature_class_independent_instances) {
 // * Fossil Logic Test Pool
 // * * * * * * * * * * * * * * * * * * * * * * * *
 FOSSIL_TEST_GROUP(cpp_feature_tests) {
-    FOSSIL_TEST_ADD(cpp_feature_suite, cpp_test_Feature_class_constructors);
-    FOSSIL_TEST_ADD(cpp_feature_suite, cpp_test_Feature_class_enable_disable);
-    FOSSIL_TEST_ADD(cpp_feature_suite, cpp_test_Feature_class_multiple_enable_disable);
-    FOSSIL_TEST_ADD(cpp_feature_suite, cpp_test_Feature_class_independent_instances);
+    FOSSIL_ADD_TEST(cpp_feature_suite, cpp_test_Feature_class_constructors);
+    FOSSIL_ADD_TEST(cpp_feature_suite, cpp_test_Feature_class_enable_disable);
+    FOSSIL_ADD_TEST(cpp_feature_suite, cpp_test_Feature_class_multiple_enable_disable);
+    FOSSIL_ADD_TEST(cpp_feature_suite, cpp_test_Feature_class_independent_instances);
 
-    FOSSIL_TEST_REGISTER(cpp_feature_suite);
+    FOSSIL_ADD_SUITE(cpp_feature_suite);
 }

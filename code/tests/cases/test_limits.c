@@ -80,9 +80,9 @@ FOSSIL_TEST(c_test_limits_aliases) {
 // * Fossil Logic Test Pool
 // * * * * * * * * * * * * * * * * * * * * * * * *
 FOSSIL_TEST_GROUP(c_limits_tests) {
-    FOSSIL_TEST_ADD(c_limits_suite, c_test_limits_unknown_type);
-    FOSSIL_TEST_ADD(c_limits_suite, c_test_limits_null_input);
-    FOSSIL_TEST_ADD(c_limits_suite, c_test_limits_aliases);
+    FOSSIL_ADD_TEST(c_limits_suite, c_test_limits_unknown_type);
+    FOSSIL_ADD_TEST(c_limits_suite, c_test_limits_null_input);
+    FOSSIL_ADD_TEST(c_limits_suite, c_test_limits_aliases);
 
-    FOSSIL_TEST_REGISTER(c_limits_suite);
+    FOSSIL_ADD_SUITE(c_limits_suite);
 }

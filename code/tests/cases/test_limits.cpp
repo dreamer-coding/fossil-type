@@ -98,10 +98,10 @@ FOSSIL_TEST(cpp_test_limits_class_scoped_usage) {
 // * Fossil Logic Test Pool
 // * * * * * * * * * * * * * * * * * * * * * * * *
 FOSSIL_TEST_GROUP(cpp_limits_tests) {
-    FOSSIL_TEST_ADD(cpp_limits_suite, cpp_test_limits_class_unknown_type);
-    FOSSIL_TEST_ADD(cpp_limits_suite, cpp_test_limits_class_null_input);
-    FOSSIL_TEST_ADD(cpp_limits_suite, cpp_test_limits_class_aliases);
-    FOSSIL_TEST_ADD(cpp_limits_suite, cpp_test_limits_class_scoped_usage);
+    FOSSIL_ADD_TEST(cpp_limits_suite, cpp_test_limits_class_unknown_type);
+    FOSSIL_ADD_TEST(cpp_limits_suite, cpp_test_limits_class_null_input);
+    FOSSIL_ADD_TEST(cpp_limits_suite, cpp_test_limits_class_aliases);
+    FOSSIL_ADD_TEST(cpp_limits_suite, cpp_test_limits_class_scoped_usage);
 
-    FOSSIL_TEST_REGISTER(cpp_limits_suite);
+    FOSSIL_ADD_SUITE(cpp_limits_suite);
 }
