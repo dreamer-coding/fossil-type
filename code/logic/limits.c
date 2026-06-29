@@ -152,8 +152,8 @@ static const fossil_type_limits fossil_limits_table[] = {
     {"b64", 0, FOSSIL_U64_MAX, sizeof(uint64_t)},
 
     /* Floating ranges represented via integer storage model */
-    {"f32", 0, FOSSIL_F32_MAX, sizeof(float)},
-    {"f64", 0, FOSSIL_F64_MAX, sizeof(double)},
+    {"f32", FOSSIL_I32_MIN, FOSSIL_I32_MAX, sizeof(float)},
+    {"f64", FOSSIL_I64_MIN, FOSSIL_I64_MAX, sizeof(double)},
 
     /* Boolean */
     {"bool", 0, 1, sizeof(bool)},
